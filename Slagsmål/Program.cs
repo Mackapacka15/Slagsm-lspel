@@ -22,8 +22,10 @@ namespace Slagsmål
                 Console.WriteLine("Du möter: " + Spelare2);
                 while (liv == true)
                 {
-                    int slag1 = generator.Next(0, 11);
-                    int slag2 = generator.Next(0, 11);
+                    int slag1 = generator.Next(1, 11);
+                    int slag2 = generator.Next(1, 11);
+                    int träff1 = generator.Next(0, 5);
+                    int träff2 = generator.Next(0, 5);
                     if (slag1 > hp2)
                     {
                         slag1 = hp2;
@@ -33,8 +35,22 @@ namespace Slagsmål
                         slag2 = hp1;
                     }
                     Console.WriteLine("Runda " + runda);
-                    hp1 = hp1 - slag2;
-                    hp2 = hp2 - slag1;
+                    if (träff1 != 1)
+                    {
+                        hp1 = hp1 - slag2;
+                    }
+                    else
+                    {
+                        slag2 = 0;
+                    }
+                    if (träff1 != 1)
+                    {
+                        hp2 = hp2 - slag1;
+                    }
+                    else
+                    {
+                        slag1 = 0;
+                    }
                     if (slag1 == slag2)
                     {
                         Console.WriteLine("Båda gjorde " + slag1 + " skada.");
@@ -94,6 +110,7 @@ namespace Slagsmål
                 if (igen1 == "ja")
                 {
                     spel = true;
+                    Console.Clear();
                 }
                 else
                 {
@@ -108,7 +125,7 @@ namespace Slagsmål
 
             Random generator = new Random();
 
-            int i =generator.Next(namn.Length);
+            int i = generator.Next(namn.Length);
             return namn[i];
         }
     }
